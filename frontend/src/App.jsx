@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 // ─── Update this to your deployed backend URL in production ───────────────────
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "https://datavault-vdx6.onrender.com/api";
 
 // Nigerian States list
 const NIGERIAN_STATES = [
