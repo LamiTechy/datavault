@@ -686,7 +686,13 @@ function UserModal({ user, token, onClose, onRefresh, onDelete }) {
     setSaving(true);
     const { ok } = await api.patch(`/admin/users/${user._id}/status`, { status }, token);
     setSaving(false);
-    if (ok) { setSaved(true); onRefresh(); setTimeout(() => setSaved(false), 2000); }
+    if (ok) {
+      setSaved(true);
+      onRefresh(); // refresh table in background — does NOT close modal
+      setTimeout(() => setSaved(false), 2500);
+    } else {
+      alert("Failed to update status. Please try again.");
+    }
   };
 
   const genderLabel = { male:"Male", female:"Female", other:"Other", prefer_not_to_say:"Prefer not to say" };
@@ -695,7 +701,12 @@ function UserModal({ user, token, onClose, onRefresh, onDelete }) {
     <div className="overlay" onClick={e => e.target === e.currentTarget && onClose()}>
       <div className="modal">
         <div className="modal-head">
-          <h3>{user.firstName} {user.lastName}</h3>
+          <div>
+            <h3>{user.firstName} {user.lastName}</h3>
+            <span className={`badge ${status}`} style={{ marginTop: "0.4rem", display: "inline-flex" }}>
+              {status === "new_member" ? "New Member" : status === "old_member" ? "Old Member" : status === "admin" ? "Admin" : status}
+            </span>
+          </div>
           <button className="modal-close" onClick={onClose}>×</button>
         </div>
         <div className="modal-body">
@@ -1015,7 +1026,7 @@ function AdminDashboard({ token, onLogout }) {
           user={selected}
           token={token}
           onClose={() => setSelected(null)}
-          onRefresh={() => { fetchAll(); setSelected(null); }}
+          onRefresh={() => { fetchAll(); }}
           onDelete={async (id) => { await api.delete(`/admin/users/${id}`, token); fetchAll(); }}
         />
       )}
