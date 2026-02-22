@@ -342,16 +342,124 @@ const CSS = `
   .save-btn:hover:not(:disabled) { background: #145536; }
   .save-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-  @media (max-width: 700px) {
-    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  /* ── TABLET (max 1024px) ── */
+  @media (max-width: 1024px) {
+    .admin-wrap { padding: 1.5rem 1rem; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .states-row { grid-template-columns: 1fr 1fr; }
+    table { font-size: 0.83rem; }
+  }
+
+  /* ── MOBILE (max 768px) ── */
+  @media (max-width: 768px) {
+
+    /* Nav */
+    nav { padding: 0.75rem 1rem; height: auto; flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+    .nav-brand { font-size: 1.1rem; }
+    .nav-links { width: 100%; flex-wrap: wrap; gap: 0.4rem; }
+    .nav-btn { font-size: 0.78rem; padding: 0.35rem 0.75rem; flex: 1; text-align: center; }
+
+    /* Form Page */
+    .page { padding: 1rem 0.75rem; }
+    .form-wrap { max-width: 100%; }
+    .form-hero { padding: 1.5rem 1.25rem 1.25rem; border-radius: 12px 12px 0 0; }
+    .form-hero h1 { font-size: 1.5rem; }
+    .form-hero p { font-size: 0.85rem; }
+    .form-body { padding: 1.25rem; border-radius: 0 0 12px 12px; }
+
+    /* Grids */
+    .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 0.85rem; }
     .span-2, .span-3 { grid-column: span 1; }
-    .form-body, .form-hero { padding: 1.5rem; }
-    .states-row { grid-template-columns: 1fr; }
-    .detail-grid { grid-template-columns: 1fr; }
+
+    /* Fields — font-size 16px prevents iOS auto-zoom */
+    .field input, .field select, .field textarea { font-size: 16px; padding: 0.75rem 0.9rem; }
+    .field label { font-size: 0.8rem; }
+    .section-divider { margin: 1.5rem 0 1rem; }
+
+    /* Submit button */
+    .submit-btn { padding: 1rem; font-size: 0.95rem; margin-top: 1.25rem; }
+
+    /* Login */
+    .login-page { padding: 1rem; align-items: flex-start; padding-top: 2rem; }
+    .login-hero { padding: 1.75rem 1.5rem; }
+    .login-hero h2 { font-size: 1.4rem; }
+    .login-body { padding: 1.5rem; }
+
+    /* Admin Dashboard */
+    .admin-wrap { padding: 1rem 0.75rem; }
+    .admin-wrap h2 { font-size: 1.4rem; margin-bottom: 1rem; }
+
+    /* Stats */
+    .stats-row { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 1.25rem; }
+    .stat-card { padding: 1rem 1.1rem; }
+    .stat-val { font-size: 1.8rem; }
+    .stat-lbl { font-size: 0.7rem; }
+
+    /* State bars */
+    .states-row { grid-template-columns: 1fr; gap: 0.75rem; margin-bottom: 1.25rem; }
+    .states-card { padding: 1rem 1.1rem; }
+    .state-bar-name { min-width: 80px; font-size: 0.8rem; }
+
+    /* Toolbar */
+    .toolbar { flex-direction: column; gap: 0.6rem; }
+    .search-box, .filter-sel { width: 100%; font-size: 16px; }
+
+    /* Table — horizontal scroll */
+    .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { min-width: 600px; }
+    th { font-size: 0.68rem; padding: 0.75rem 0.8rem; }
+    td { padding: 0.75rem 0.8rem; font-size: 0.82rem; }
+    .td-sub { font-size: 0.72rem; }
+
+    /* Action buttons */
+    .act-btn { padding: 0.25rem 0.5rem; font-size: 0.74rem; }
+
+    /* Pagination */
+    .pagination { padding: 1rem; gap: 0.3rem; flex-wrap: wrap; }
+    .pg-btn { padding: 0.3rem 0.6rem; font-size: 0.78rem; }
+
+    /* Modal — slides up from bottom */
+    .overlay { padding: 0; align-items: flex-end; }
+    .modal { max-height: 92vh; border-radius: 16px 16px 0 0; }
+    .modal-head { padding: 1.25rem 1.5rem; border-radius: 16px 16px 0 0; }
+    .modal-head h3 { font-size: 1.1rem; }
+    .modal-body { padding: 1.25rem 1.5rem; }
+    .detail-grid { grid-template-columns: 1fr; gap: 0.75rem; }
     .detail-item.full { grid-column: span 1; }
-    nav { padding: 0 1rem; }
-    .admin-wrap { padding: 1.5rem 0; }
-    th, td { padding: 0.65rem 0.7rem; }
+    .status-row { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+    .status-sel, .save-btn { width: 100%; }
+    .save-btn { padding: 0.65rem; text-align: center; }
+  }
+
+  /* ── SMALL MOBILE (max 400px) ── */
+  @media (max-width: 400px) {
+    .form-hero h1 { font-size: 1.3rem; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .stat-val { font-size: 1.5rem; }
+    .nav-btn { font-size: 0.72rem; padding: 0.3rem 0.6rem; }
+    table { min-width: 500px; }
+  }
+
+  /* ── MOBILE USER CARDS (shows instead of table on small screens) ── */
+  .user-cards { display: none; flex-direction: column; gap: 0.85rem; }
+  .user-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; box-shadow: var(--shadow-sm); }
+  .user-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.75rem; gap: 0.5rem; }
+  .user-card-name { font-weight: 700; font-size: 0.95rem; color: var(--ink); }
+  .user-card-occ { font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; }
+  .user-card-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1rem; margin-bottom: 0.85rem; }
+  .user-card-lbl { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); }
+  .user-card-val { font-size: 0.83rem; color: var(--ink); font-weight: 500; margin-top: 1px; word-break: break-word; }
+  .user-card-actions { display: flex; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--border); }
+  .user-card-actions .act-btn { flex: 1; text-align: center; padding: 0.5rem; font-size: 0.82rem; border-radius: 8px; }
+
+  /* Delete button used in modal */
+  .del-btn { padding: 0.45rem 1.1rem; background: var(--red); color: #fff; border: none; border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.18s; }
+  .del-btn:hover:not(:disabled) { background: #922b21; }
+  .del-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  @media (max-width: 640px) {
+    .tbl-wrap table, .tbl-wrap thead, .tbl-wrap tbody { display: none; }
+    .user-cards { display: flex; }
   }
 `;
 
@@ -561,10 +669,19 @@ function AdminLogin({ onLogin }) {
 }
 
 // ─── USER DETAIL MODAL ─────────────────────────────────────────────────────────
-function UserModal({ user, token, onClose, onRefresh }) {
+function UserModal({ user, token, onClose, onRefresh, onDelete }) {
   const [status, setStatus] = useState(user.status);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  const handleDelete = async () => {
+    if (!window.confirm(`Delete record for "${user.firstName} ${user.lastName}"? This cannot be undone.`)) return;
+    setDeleting(true);
+    await onDelete(user._id);
+    setDeleting(false);
+    onClose();
+  };
 
   const saveStatus = async () => {
     setSaving(true);
@@ -671,6 +788,11 @@ function UserModal({ user, token, onClose, onRefresh }) {
               </select>
               <button className="save-btn" onClick={saveStatus} disabled={saving}>
                 {saved ? "✓ Saved" : saving ? "Saving…" : "Update Status"}
+              </button>
+            </div>
+            <div style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid var(--border)" }}>
+              <button className="del-btn" onClick={handleDelete} disabled={deleting} style={{ width: "100%" }}>
+                {deleting ? "Deleting…" : "🗑 Delete This Record"}
               </button>
             </div>
             <div style={{ marginTop: "0.85rem", fontSize: "0.78rem", color: "var(--ink-soft)" }}>
@@ -828,6 +950,54 @@ function AdminDashboard({ token, onLogout }) {
                   ))}
                 </tbody>
               </table>
+
+              {/* Mobile cards — shown instead of table on small screens */}
+              <div className="user-cards">
+                {users.map(u => (
+                  <div className="user-card" key={u._id}>
+                    <div className="user-card-top">
+                      <div>
+                        <div className="user-card-name">{u.firstName} {u.lastName}</div>
+                        {u.occupation && <div className="user-card-occ">{u.occupation}</div>}
+                      </div>
+                      <span className={`badge ${u.status}`}>{u.status}</span>
+                    </div>
+                    <div className="user-card-body">
+                      <div className="user-card-field">
+                        <div className="user-card-lbl">Email</div>
+                        <div className="user-card-val">{u.email}</div>
+                      </div>
+                      <div className="user-card-field">
+                        <div className="user-card-lbl">Phone</div>
+                        <div className="user-card-val">{u.phone}</div>
+                      </div>
+                      <div className="user-card-field">
+                        <div className="user-card-lbl">State of Origin</div>
+                        <div className="user-card-val">{fmt(u.stateOfOrigin)}</div>
+                      </div>
+                      <div className="user-card-field">
+                        <div className="user-card-lbl">State of Residence</div>
+                        <div className="user-card-val">{fmt(u.stateOfResidence)}</div>
+                      </div>
+                      <div className="user-card-field">
+                        <div className="user-card-lbl">Date</div>
+                        <div className="user-card-val">{fmtDate(u.submittedAt)}</div>
+                      </div>
+                      {u.lgaOfOrigin && (
+                        <div className="user-card-field">
+                          <div className="user-card-lbl">LGA of Origin</div>
+                          <div className="user-card-val">{u.lgaOfOrigin}</div>
+                        </div>
+                      )}
+                    </div>
+                    <div className="user-card-actions">
+                      <button className="act-btn" onClick={() => setSelected(u)}>👁 View All</button>
+                      <button className="act-btn del" onClick={() => del(u._id, `${u.firstName} ${u.lastName}`)}>🗑 Delete</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
               {pagination.pages > 1 && (
                 <div className="pagination">
                   <button className="pg-btn" disabled={page <= 1} onClick={() => setPage(p => p - 1)}>← Prev</button>
@@ -850,6 +1020,7 @@ function AdminDashboard({ token, onLogout }) {
           token={token}
           onClose={() => setSelected(null)}
           onRefresh={() => { fetchAll(); setSelected(null); }}
+          onDelete={async (id) => { await api.delete(`/admin/users/${id}`, token); fetchAll(); }}
         />
       )}
     </div>
