@@ -85,8 +85,8 @@ const userSchema = new mongoose.Schema({
   // ── Admin Fields ───────────────────────────────────────────────────────────
   status: {
     type: String,
-    enum: ['new', 'reviewed', 'contacted', 'archived'],
-    default: 'new',
+    enum: ['new_member', 'old_member', 'admin'],
+    default: 'new_member',
   },
   submittedAt: {
     type: Date,

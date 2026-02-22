@@ -299,10 +299,9 @@ const CSS = `
 
   /* Badges */
   .badge { display: inline-flex; align-items: center; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-  .badge.new { background: var(--blue-light); color: var(--blue); }
-  .badge.reviewed { background: var(--gold-light); color: var(--gold); }
-  .badge.contacted { background: var(--green-light); color: var(--green); }
-  .badge.archived { background: #f0f0f0; color: #777; }
+  .badge.new_member { background: var(--blue-light); color: var(--blue); }
+  .badge.old_member { background: var(--gold-light); color: var(--gold); }
+  .badge.admin { background: #f3e8ff; color: #7c3aed; }
 
   /* Action buttons */
   .act-btn { border: 1px solid var(--border); border-radius: 5px; padding: 0.28rem 0.65rem; background: none; cursor: pointer; font-size: 0.78rem; font-family: 'Inter', sans-serif; font-weight: 500; color: var(--ink-mid); transition: all 0.15s; margin-right: 0.3rem; }
@@ -781,10 +780,9 @@ function UserModal({ user, token, onClose, onRefresh, onDelete }) {
             <h4>Record Status</h4>
             <div className="status-row">
               <select className="status-sel" value={status} onChange={e => setStatus(e.target.value)}>
-                <option value="new">New</option>
-                <option value="reviewed">Reviewed</option>
-                <option value="contacted">Contacted</option>
-                <option value="archived">Archived</option>
+                <option value="new_member">New Member</option>
+                <option value="old_member">Old Member</option>
+                <option value="admin">Admin</option>
               </select>
               <button className="save-btn" onClick={saveStatus} disabled={saving}>
                 {saved ? "✓ Saved" : saving ? "Saving…" : "Update Status"}
@@ -853,10 +851,9 @@ function AdminDashboard({ token, onLogout }) {
           <div className="stats-row">
             <div className="stat-card"><div className="stat-val">{stats.total}</div><div className="stat-lbl">Total</div></div>
             <div className="stat-card gold"><div className="stat-val">{stats.today}</div><div className="stat-lbl">Today</div></div>
-            <div className="stat-card"><div className="stat-val">{stats.byStatus?.new || 0}</div><div className="stat-lbl">New</div></div>
-            <div className="stat-card b"><div className="stat-val">{stats.byStatus?.reviewed || 0}</div><div className="stat-lbl">Reviewed</div></div>
-            <div className="stat-card g"><div className="stat-val">{stats.byStatus?.contacted || 0}</div><div className="stat-lbl">Contacted</div></div>
-            <div className="stat-card"><div className="stat-val">{stats.byStatus?.archived || 0}</div><div className="stat-lbl">Archived</div></div>
+            <div className="stat-card b"><div className="stat-val">{stats.byStatus?.new_member || 0}</div><div className="stat-lbl">New Members</div></div>
+            <div className="stat-card gold"><div className="stat-val">{stats.byStatus?.old_member || 0}</div><div className="stat-lbl">Old Members</div></div>
+            <div className="stat-card" style={{borderTop:"3px solid #7c3aed"}}><div className="stat-val" style={{color:"#7c3aed"}}>{stats.byStatus?.admin || 0}</div><div className="stat-lbl">Admins</div></div>
           </div>
         )}
 
@@ -892,10 +889,9 @@ function AdminDashboard({ token, onLogout }) {
             onChange={e => { setSearch(e.target.value); setPage(1); }} />
           <select className="filter-sel" value={statusFilter} onChange={e => { setStatusFilter(e.target.value); setPage(1); }}>
             <option value="">All Statuses</option>
-            <option value="new">New</option>
-            <option value="reviewed">Reviewed</option>
-            <option value="contacted">Contacted</option>
-            <option value="archived">Archived</option>
+            <option value="new_member">New Member</option>
+            <option value="old_member">Old Member</option>
+            <option value="admin">Admin</option>
           </select>
           <select className="filter-sel" value={originFilter} onChange={e => { setOriginFilter(e.target.value); setPage(1); }}>
             <option value="">Origin: All States</option>

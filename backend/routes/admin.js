@@ -64,7 +64,7 @@ router.get('/users/:id', authMiddleware, async (req, res) => {
 });
 
 // ─── PATCH /api/admin/users/:id/status ────────────────────────────────────────
-router.patch('/users/:id/status', authMiddleware, [body('status').isIn(['new', 'reviewed', 'contacted', 'archived'])], async (req, res) => {
+router.patch('/users/:id/status', authMiddleware, [body('status').isIn(['new_member', 'old_member', 'admin'])], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ error: 'Invalid status value.' });
   try {
